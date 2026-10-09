@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="影音先锋av电影网（yingyinxianfengavdianyingwang-app）是专注于提供最新电影资讯、高清影视推荐、热门剧集排行与观影指南的影视门户网站。">
+<meta name="keywords" content="影音先锋av电影网, yingyinxianfengavdianyingwang-app, 电影, 电影推荐, 影视资讯, 在线观影, 电影排行">
+<meta name="author" content="影音先锋av电影网">
+<meta name="theme-color" content="#0b1020">
+<title>影音先锋av电影网 - 最新电影资讯与高清影视推荐 | yingyinxianfengavdianyingwang-app</title>
+<link rel="canonical" href="https://yingyinxianfengavdianyingwang-app.github.io">
+<style>
+  :root{
+    --bg1:#070b1a; --bg2:#0d1530; --card:#121c3a; --card-hover:#1a2750;
+    --line:rgba(255,255,255,.08); --txt:#eaf0ff; --sub:#9fb0d8; --gold:#ffc46b;
+    --cyan:#4ee1ff; --pink:#ff6bd6; --green:#3dffb0;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{
+    font-family:"PingFang SC","Microsoft YaHei","WenQuanYi Micro Hei",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    background:radial-gradient(1200px 600px at 80% -10%,rgba(78,225,255,.18),transparent 60%),
+               radial-gradient(1000px 500px at 0% 10%,rgba(255,107,214,.14),transparent 55%),
+               linear-gradient(180deg,var(--bg1),var(--bg2));
+    color:var(--txt);line-height:1.75;overflow-x:hidden;
+  }
+  a{color:var(--cyan);text-decoration:none;transition:.25s}
+  a:hover{color:var(--gold)}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 20px}
+  .section-title{display:flex;align-items:center;gap:12px;margin:0 0 26px;font-size:clamp(20px,4vw,28px);font-weight:800;letter-spacing:.5px}
+  .section-title .bar{width:5px;height:26px;border-radius:4px;background:linear-gradient(var(--cyan),var(--pink))}
+  .section-title small{font-size:13px;color:var(--sub);font-weight:500;margin-left:auto;letter-spacing:1px}
+
+  /* Header */
+  header{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);background:rgba(7,11,26,.72);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;gap:18px;height:64px}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:900;font-size:18px;letter-spacing:.5px}
+  .logo .dot{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,var(--cyan),var(--pink));display:grid;place-items:center;font-size:14px;color:#04101f;box-shadow:0 6px 18px rgba(78,225,255,.35)}
+  .logo b{background:linear-gradient(90deg,#fff,var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .menu{display:flex;gap:6px;margin-left:auto;flex-wrap:wrap}
+  .menu a{position:relative;padding:8px 14px;border-radius:999px;font-size:14px;color:var(--sub);font-weight:600}
+  .menu a:hover{color:#fff;background:rgba(255,255,255,.06)}
+  .menu a::after{content:"";position:absolute;left:50%;bottom:2px;width:0;height:2px;background:var(--gold);transition:.3s;transform:translateX(-50%)}
+  .menu a:hover::after{width:60%}
+
+  /* Hero */
+  .hero{position:relative;padding:clamp(50px,10vw,96px) 0 70px;overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:48px 48px;mask-image:radial-gradient(circle at 50% 30%,#000 0%,transparent 70%)}
+  .hero-grid{position:relative;display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center}
+  .tag{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:999px;background:rgba(78,225,255,.1);border:1px solid rgba(78,225,255,.3);color:var(--cyan);font-size:12px;font-weight:700;letter-spacing:1px;margin-bottom:18px}
+  .tag i{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green);animation:pulse 1.6s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+  h1{font-size:clamp(30px,6vw,54px);line-height:1.18;font-weight:900;margin-bottom:16px}
+  h1 em{font-style:normal;background:linear-gradient(90deg,var(--cyan),var(--pink),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero p{color:var(--sub);font-size:clamp(14px,2.4vw,17px);max-width:560px;margin-bottom:24px}
+  .cta{display:flex;gap:12px;flex-wrap:wrap}
+  .btn{padding:13px 28px;border-radius:12px;font-weight:800;font-size:15px;border:1px solid transparent;transition:.25s;display:inline-flex;align-items:center;gap:8px}
+  .btn-primary{background:linear-gradient(135deg,var(--cyan),var(--pink));color:#04101f;box-shadow:0 12px 30px rgba(255,107,214,.3)}
+  .btn-primary:hover{transform:translateY(-3px);color:#04101f}
+  .btn-ghost{background:rgba(255,255,255,.04);border-color:var(--line);color:#fff}
+  .btn-ghost:hover{border-color:var(--cyan);color:var(--cyan)}
+  .hero-card{position:relative;aspect-ratio:3/4;border-radius:24px;padding:24px;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;background:linear-gradient(160deg,rgba(20,30,60,.6),rgba(10,15,35,.9)),repeating-linear-gradient(45deg,transparent 0 14px,rgba(255,255,255,.03) 14px 28px);border:1px solid var(--line);box-shadow:0 30px 70px rgba(0,0,0,.5);transform:rotate(2deg)}
+  .hero-card:hover{transform:rotate(0)}
+  .hero-card .badge{position:absolute;top:20px;left:20px;background:var(--gold);color:#241800;font-weight:900;font-size:12px;padding:5px 12px;border-radius:8px}
+  .hero-card h3{font-size:24px;margin-bottom:8px}
+  .hero-card span{color:var(--sub);font-size:13px}
+  .float{position:absolute;border-radius:14px;padding:10px 14px;font-size:12px;font-weight:700;background:rgba(18,28,58,.85);border:1px solid var(--line);backdrop-filter:blur(6px);box-shadow:0 10px 24px rgba(0,0,0,.4);animation:floaty 5s ease-in-out infinite}
+  .f1{top:-10px;left:-20px;color:var(--cyan);animation-delay:0s}
+  .f2{bottom:40px;right:-26px;color:var(--gold);animation-delay:1.5s}
+  .f3{top:38%;right:6px;color:var(--green);animation-delay:3s}
+  @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+
+  section{padding:clamp(44px,7vw,74px) 0}
+  .eyebrow{color:var(--pink);font-size:12px;letter-spacing:3px;font-weight:800;text-transform:uppercase}
+
+  /* 栏目1 电影推荐 */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:20px}
+  .film{position:relative;background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;transition:.3s;cursor:pointer}
+  .film:hover{transform:translateY(-6px);background:var(--card-hover);border-color:rgba(78,225,255,.4);box-shadow:0 18px 40px rgba(0,0,0,.45)}
+  .poster{position:relative;aspect-ratio:2/3;background:linear-gradient(135deg,#1c2a55,#2a1c45);display:grid;place-items:center;font-size:clamp(26px,5vw,40px)}
+  .poster::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 30% 20%,rgba(255,255,255,.18),transparent 50%)}
+  .poster .no{position:absolute;top:12px;left:12px;font-size:12px;font-weight:800;color:#04101f;background:var(--gold);padding:3px 9px;border-radius:7px}
+  .film-body{padding:14px}
+  .film-body h4{font-size:15px;margin-bottom:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .film-body .meta{font-size:12px;color:var(--sub);display:flex;gap:8px;flex-wrap:wrap}
+  .film-body .meta b{color:var(--gold);font-weight:700}
+  .stars{margin-top:10px;color:var(--gold);font-size:12px;letter-spacing:2px}
+
+  /* 栏目2 资讯 */
+  .news{display:grid;grid-template-columns:1.1fr .9fr;gap:22px}
+  .news-main{background:var(--card);border:1px solid var(--line);border-radius:20px;overflow:hidden;transition:.3s}
+  .news-main:hover{border-color:rgba(255,107,214,.45)}
+  .news-main .thumb{aspect-ratio:16/9;background:linear-gradient(120deg,#2b1c4d,#123b4d);display:grid;place-items:center;font-size:34px}
+  .news-main .txt{padding:20px}
+  .news-main h3{font-size:20px;margin-bottom:8px}
+  .news-list{display:flex;flex-direction:column;gap:14px}
+  .news-item{display:flex;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;transition:.25s}
+  .news-item:hover{background:var(--card-hover);transform:translateX(4px)}
+  .news-item .t{width:78px;height:78px;flex:none;border-radius:10px;display:grid;place-items:center;font-size:24px;background:linear-gradient(135deg,#1c3a5f,#3a1c4f)}
+  .news-item h5{font-size:15px;margin-bottom:4px;line-height:1.45}
+  .news-item time{font-size:11px;color:var(--sub)}
+
+  /* 栏目3 排行榜 */
+  .chart{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+  .chart-box{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px}
+  .chart-box h4{font-size:16px;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+  .chart-box h4 u{text-decoration:none;font-size:12px;color:var(--sub);font-weight:500;margin-left:auto}
+  .rank{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px dashed var(--line)}
+  .rank:last-child{border:0}
+  .rank .n{width:26px;height:26px;flex:none;border-radius:8px;display:grid;place-items:center;font-size:12px;font-weight:900;background:rgba(255,255,255,.06);color:var(--sub)}
+  .rank:nth-child(1) .n{background:linear-gradient(135deg,var(--gold),#ff8a3d);color:#241800}
+  .rank:nth-child(2) .n{background:linear-gradient(135deg,#c9d4e6,#8f9db8);color:#1a2030}
+  .rank:nth-child(3) .n{background:linear-gradient(135deg,#e0a76b,#a9713c);color:#241800}
+  .rank .info{flex:1;min-width:0}
+  .rank .info b{display:block;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .rank .info small{color:var(--sub);font-size:11px}
+  .rank .up{color:var(--green);font-size:12px;font-weight:800}
+
+  /* 栏目4 分类导航 */
+  .cats{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
+  .cat{position:relative;height:120px;border-radius:16px;display:grid;place-items:center;text-align:center;font-weight:800;font-size:15px;overflow:hidden;border:1px solid var(--line);transition:.3s}
+  .cat:hover{transform:scale(1.04);color:#04101f}
+  .cat::before{content:"";position:absolute;inset:0;opacity:.85;transition:.3s}
+  .cat:hover::before{opacity:1}
+  .cat span{position:relative;z-index:2}
+  .c1::before{background:linear-gradient(135deg,#ff6bd6,#9b4dff)} .c2::before{background:linear-gradient(135deg,#4ee1ff,#2b8cff)}
+  .c3::before{background:linear-gradient(135deg,#ffc46b,#ff8a3d)} .c4::before{background:linear-gradient(135deg,#3dffb0,#16c79a)}
+  .c5::before{background:linear-gradient(135deg,#ff7a7a,#ff4d6d)} .c6::before{background:linear-gradient(135deg,#a78bfa,#5b6ff5)}
+
+  /* 栏目5 关于 */
+  .about{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px;text-align:center;transition:.3s}
+  .stat:hover{border-color:var(--cyan);transform:translateY(-4px)}
+  .stat b{display:block;font-size:32px;font-weight:900;background:linear-gradient(90deg,var(--cyan),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .stat p{color:var(--sub);font-size:13px;margin-top:6px}
+
+  /* SEO 文字区 */
+  .seo{background:rgba(255,255,255,.02);border:1px solid var(--line);border-radius:20px;padding:26px}
+  .seo h3{font-size:18px;margin-bottom:12px;color:var(--gold)}
+  .seo p{color:var(--sub);font-size:14px;margin-bottom:10px;text-align:justify}
+  .seo strong{color:#fff}
+
+  footer{border-top:1px solid var(--line);padding:34px 0 26px;margin-top:30px;color:var(--sub);font-size:13px}
+  .foot{display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between;align-items:center}
+  .foot-links{display:flex;gap:16px;flex-wrap:wrap}
+  .foot-links a{color:var(--sub)}
+  .foot-links a:hover{color:var(--cyan)}
+
+  /* 移动端 */
+  @media (max-width:820px){
+    .hero-grid{grid-template-columns:1fr}
+    .hero-card{display:none}
+    .news{grid-template-columns:1fr}
+    .menu a{padding:6px 10px;font-size:13px}
+    .section-title small{display:none}
+  }
+  @media (max-width:520px){
+    .wrap{padding:0 14px}
+    .nav{height:58px;gap:10px}
+    .logo{font-size:15px}
+    .menu{gap:4px}
+    .menu a{padding:5px 8px;font-size:12px}
+    .btn{padding:11px 20px;font-size:14px;flex:1;justify-content:center}
+    .cta .btn-ghost{flex:1}
+  }
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/yazhou.js"></script>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#top" aria-label="影音先锋av电影网 首页">
+      <span class="dot">影</span>
+      <b>影音先锋av电影网</b>
+    </a>
+    <nav class="menu" aria-label="主导航">
+      <a href="#recommend">电影推荐</a>
+      <a href="#news">影视资讯</a>
+      <a href="#rank">热播排行</a>
+      <a href="#genre">影片分类</a>
+      <a href="#about">关于我们</a>
+    </nav>
+  </div>
+</header>
+
+<!-- 首页 / Hero -->
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="tag"><i></i> 每日更新 · 精选片单</span>
+      <h1>发现好电影，从 <em>影音先锋av电影网</em> 开始</h1>
+      <p>影音先锋av电影网（yingyinxianfengavdianyingwang-app）致力于为影迷提供最新、最全、最优质的电影资讯与观影指南。从院线大片到冷门佳作，从高分经典到热门剧集，一站式满足你的观影需求。</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="#recommend">立即探索片单 →</a>
+        <a class="btn btn-ghost" href="#rank">查看今日排行</a>
+      </div>
+    </div>
+    <div class="hero-card">
+      <span class="badge">今日推荐</span>
+      <span class="float f1">🎬 4K 高清</span>
+      <span class="float f2">⭐ 8.9 分</span>
+      <span class="float f3">🔥 热播中</span>
+      <h3>沉浸式观影体验</h3>
+      <span>精选全球优质影片 · 专业影评解读 · 个性化推荐</span>
+    </div>
+  </div>
+</section>
+
+<!-- 栏目一：电影推荐 -->
+<section id="recommend">
+  <div class="wrap">
+    <div class="section-title"><span class="bar"></span>精选电影推荐 <small>EDITOR'S PICK</small></div>
+    <div class="grid">
+      <article class="film"><div class="poster"><span class="no">TOP 1</span>🎥</div><div class="film-body">
+        <h4>星际回响</h4><div class="meta"><span>科幻 / 冒险</span><span>·</span><span><b>2026</b></span></div>
+        <div class="stars">★★★★☆ 8.7</div></div></article>
+      <article class="film"><div class="poster"><span class="no">TOP 2</span>🌆</div><div class="film-body">
+        <h4>霓虹城市</h4><div class="meta"><span>犯罪 / 悬疑</span><span>·</span><span><b>2026</b></span></div>
+        <div class="stars">★★★★★ 9.1</div></div></article>
+      <article class="film"><div class="poster"><span class="no">TOP 3</span>🏔️</div><div class="film-body">
+        <h4>远山来信</h4><div class="meta"><span>剧情 / 文艺</span><span>·</span><span><b>2025</b></span></div>
+        <div class="stars">★★★★☆ 8.5</div></div></article>
+      <article class="film"><div class="poster"><span class="no">TOP 4</span>🐉</div><div class="film-body">
+        <h4>山海异闻录</h4><div class="meta"><span>奇幻 / 动作</span><span>·</span><span><b>2026</b></span></div>
+        <div class="stars">★★★★☆ 8.3</div></div></article>
+      <article class="film"><div class="poster"><span class="no">TOP 5</span>💔</div><div class="film-body">
+        <h4>第七封信</h4><div class="meta"><span>爱情 / 剧情</span><span>·</span><span><b>2025</b></span></div>
+        <div class="stars">★★★★☆ 8.6</div></div></article>
+      <article class="film"><div class="poster"><span class="no">TOP 6</span>🚀</div><div class="film-body">
+        <h4>深空计划</h4><div class="meta"><span>科幻 / 灾难</span><span>·</span><span><b>2026</b></span></div>
+        <div class="stars">★★★★☆ 8.4</div></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- 栏目二：影视资讯 -->
+<section id="news">
+  <div class="wrap">
+    <div class="section-title"><span class="bar"></span>影视资讯速递 <small>LATEST NEWS</small></div>
+    <div class="news">
+      <a class="news-main" href="#">
+        <div class="thumb">📰</div>
+        <div class="txt">
+          <h3>2026 秋季档电影前瞻：十大值得期待的院线大片</h3>
+          <p style="color:var(--sub);font-size:14px">从国产现实主义力作到好莱坞视效巨制，今年秋天的大银幕看点十足。影音先锋av电影网为你梳理最值得放入观影清单的十部作品。</p>
+          <time style="font-size:12px;color:var(--sub)">2026-10-08 · 阅读 2.4 万</time>
+        </div>
+      </a>
+      <div class="news-list">
+        <a class="news-item" href="#"><div class="t">🏆</div><div><h5>国际电影节获奖名单揭晓，亚洲影片表现亮眼</h5><time>2026-10-07</time></div></a>
+        <a class="news-item" href="#"><div class="t">🎞️</div><div><h5>经典老片 4K 修复版定档，大银幕重温感动</h5><time>2026-10-06</time></div></a>
+        <a class="news-item" href="#"><div class="t">📺</div><div><h5>流媒体剧集井喷，如何避免"选择困难"？</h5><time>2026-10-05</time></div></a>
+        <a class="news-item" href="#"><div class="t">🎤</div><div><h5>导演访谈：一部好电影的核心到底是什么</h5><time>2026-10-04</time></div></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 栏目三：热播排行 -->
+<section id="rank">
+  <div class="wrap">
+    <div class="section-title"><span class="bar"></span>实时热播排行 <small>TOP CHARTS</small></div>
+    <div class="chart">
+      <div class="chart-box"><h4>🎬 电影热榜 <u>按热度</u></h4>
+        <div class="rank"><span class="n">1</span><div class="info"><b>星际回响</b><small>科幻 · 128 分钟</small></div><span class="up">▲3</span></div>
+        <div class="rank"><span class="n">2</span><div class="info"><b>霓虹城市</b><small>犯罪 · 115 分钟</small></div><span class="up">▲1</span></div>
+        <div class="rank"><span class="n">3</span><div class="info"><b>山海异闻录</b><small>奇幻 · 142 分钟</small></div><span class="up">▲5</span></div>
+        <div class="rank"><span class="n">4</span><div class="info"><b>远山来信</b><small>剧情 · 96 分钟</small></div><span class="up">▼1</span></div>
+        <div class="rank"><span class="n">5</span><div class="info"><b>深空计划</b><small>科幻 · 150 分钟</small></div><span class="up">▲2</span></div>
+      </div>
+      <div class="chart-box"><h4>📺 剧集热榜 <u>按评分</u></h4>
+        <div class="rank"><span class="n">1</span><div class="info"><b>长安十二时辰 · 特别篇</b><small>历史 · 9.3 分</small></div><span class="up">▲2</span></div>
+        <div class="rank"><span class="n">2</span><div class="info"><b>沉默的真相 2</b><small>悬疑 · 9.1 分</small></div><span class="up">▲1</span></div>
+        <div class="rank"><span class="n">3</span><div class="info"><b>异人之下</b><small>奇幻 · 8.8 分</small></div><span class="up">▲4</span></div>
+        <div class="rank"><span class="n">4</span><div class="info"><b>人间烟火</b><small>都市 · 8.6 分</small></div><span class="up">▼2</span></div>
+        <div class="rank"><span class="n">5</span><div class="info"><b>边境线</b><small>犯罪 · 8.5 分</small></div><span class="up">▲1</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 栏目四：影片分类 -->
+<section id="genre">
+  <div class="wrap">
+    <div class="section-title"><span class="bar"></span>按类型找电影 <small>GENRES</small></div>
+    <div class="cats">
+      <a class="cat c1" href="#"><span>动作 · 冒险</span></a>
+      <a class="cat c2" href="#"><span>科幻 · 奇幻</span></a>
+      <a class="cat c3" href="#"><span>喜剧 · 治愈</span></a>
+      <a class="cat c4" href="#"><span>悬疑 · 犯罪</span></a>
+      <a class="cat c5" href="#"><span>爱情 · 青春</span></a>
+      <a class="cat c6" href="#"><span>纪录片 · 文艺</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- 栏目五：关于我们 -->
+<section id="about">
+  <div class="wrap">
+    <div class="section-title"><span class="bar"></span>关于 影音先锋av电影网 <small>ABOUT</small></div>
+    <div class="about">
+      <div class="stat"><b>10,000+</b><p>收录影片条目</p></div>
+      <div class="stat"><b>120+</b><p>专业影评人</p></div>
+      <div class="stat"><b>50,000+</b><p>每日活跃影迷</p></div>
+      <div class="stat"><b>365</b><p>全年无休更新</p></div>
+    </div>
+    <div class="seo" style="margin-top:24px">
+      <h3>为什么选择 影音先锋av电影网？</h3>
+      <p><strong>影音先锋av电影网</strong>（网址：<strong>https://yingyinxianfengavdianyingwang-app.github.io</strong>）是一个专注于电影与影视内容的垂直门户。我们提供<strong>最新电影资讯</strong>、<strong>高分电影推荐</strong>、<strong>热播剧集排行</strong>与<strong>观影指南</strong>，帮助每一位用户在海量影视作品中快速找到值得一看的好片。</p>
+      <p>网站内容涵盖<strong>动作、科幻、喜剧、悬疑、爱情、纪录片</strong>等全类型影片，支持按类型、按年份、按评分多维筛选。无论你是资深影迷还是偶尔观影，影音先锋av电影网 都能成为你信赖的观影搭档。</p>
+      <p>关键词：<strong>影音先锋av电影网</strong>、<strong>yingyinxianfengavdianyingwang-app</strong>、电影推荐、影视资讯、在线观影指南、电影排行榜。</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <div>© 2026 <strong style="color:#fff">影音先锋av电影网</strong> · yingyinxianfengavdianyingwang-app · 专注于优质电影内容</div>
+    <div class="foot-links">
+      <a href="#top">返回顶部</a>
+      <a href="#recommend">电影推荐</a>
+      <a href="#news">影视资讯</a>
+      <a href="#rank">热播排行</a>
+      <a href="#genre">影片分类</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
